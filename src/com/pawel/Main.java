@@ -10,7 +10,7 @@ public class Main {
     }
 
     static void menu() {
-        System.out.println("\n######################################\nMAIN MENU\n");
+        System.out.println("\n######################################\nMain Menu\n");
         Scanner scanner = new Scanner(System.in);
         System.out.println("User interface:\n1.Login\n2.Register");
         String choiceS = scanner.next();
