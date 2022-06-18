@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="messenger">
+    <output-path>$PROJECT_DIR$/out/artifacts/messenger</output-path>
+    <root id="archive" name="messenger.jar" />
+  </artifact>
+</component>
