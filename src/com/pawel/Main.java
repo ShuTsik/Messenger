@@ -12,7 +12,7 @@ public class Main {
     static void menu() {
         System.out.println("\n#####################################\nMain Menu\n");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("User interface:\n1.Login\n2.Register");
+        System.out.println("User interface:\n1.Login\n2.Register\n3.Wyłącz aplikacje");
         String choiceS = scanner.next();
         int choice = 0;
         try {
@@ -28,6 +28,8 @@ public class Main {
             case 2:
                 UserServices.getInstance().userRegister();
                 break;
+            case 3:
+                break;
             default:
                 menu();
                 break;
@@ -36,7 +38,6 @@ public class Main {
 
     /*
     todo
-    - dodać możliwość wyłaczenia aplikacji
     LOGOWANIE:
     - dodać klasę singleton ... która posiada referencję do obiektu aktualnie zalogowanego użytkownika
 

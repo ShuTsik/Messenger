@@ -39,6 +39,7 @@ public class UserRepository {
             if(checkUser.getLogin().equals(user.getLogin()) && checkUser.getPassword().equals(user.getPassword()))
             {
                 System.out.println("Pomyślnie zalogowano");
+                UserLogged.getInstance().setActiveUser(checkUser);
                 return true;
             }
         }
