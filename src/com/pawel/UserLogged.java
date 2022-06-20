@@ -7,8 +7,6 @@ public class UserLogged {
         return userLogged;
     }
 
-    private final UserRepository userRepository = UserRepository.getInstance();
-
     public void setActiveUser(User user) {
 
     }
