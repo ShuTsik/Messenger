@@ -1,7 +1,6 @@
 package com.pawel;
 
 public class UserLogged {
-    boolean
     private static UserLogged userLogged = new UserLogged();
     private UserLogged() { }
     public static UserLogged getInstance(){
