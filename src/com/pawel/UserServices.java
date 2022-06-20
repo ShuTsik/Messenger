@@ -23,7 +23,21 @@ public class UserServices {
         if (!success) {
             System.out.println("Błąd rejestracji");
         }
-        System.out.println(userRepository.getUserList().size());
+        Main.menu();
+    }
+
+    public void userLogin()
+    {
+        User checkUser = new User();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("podaj login");
+        checkUser.setLogin(scanner.next());
+        System.out.println("podaj haslo");
+        checkUser.setPassword(scanner.next());
+        boolean success = userRepository.userLogin(checkUser);
+        if(!success) {
+            System.out.println("Podany login lub hasło są nieprawidlowe");
+        }
         Main.menu();
     }
 }

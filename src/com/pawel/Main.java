@@ -23,7 +23,7 @@ public class Main {
         switch(choice)
         {
             case 1:
-                System.out.println("1");
+                UserServices.getInstance().userLogin();
                 break;
             case 2:
                 UserServices.getInstance().userRegister();

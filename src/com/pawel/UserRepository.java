@@ -27,6 +27,24 @@ public class UserRepository {
         return true;
     }
 
+    public boolean userLogin(User checkUser)
+    {
+        if(checkUser == null ||
+                checkUser.getLogin() == null || checkUser.getLogin().trim().length() == 0 ||
+                checkUser.getPassword() == null || checkUser.getPassword().trim().length() == 0){
+            return false;
+        }
+        for (User user : userList)
+        {
+            if(checkUser.getLogin().equals(user.getLogin()) && checkUser.getPassword().equals(user.getPassword()))
+            {
+                System.out.println("Pomyślnie zalogowano");
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<User> getUserList() {
         return userList;
     }
