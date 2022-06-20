@@ -3,7 +3,7 @@ package com.pawel;
 import java.util.Scanner;
 
 public class UserServices {
-    private static UserServices userServices = new UserServices();
+    private static final UserServices userServices = new UserServices();
     private UserServices() { }
     public static UserServices getInstance(){
         return userServices;
