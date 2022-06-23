@@ -19,10 +19,8 @@ public class UserServices {
         newUser.setLogin(scanner.next());
         System.out.println("podaj haslo");
         newUser.setPassword(scanner.next());
-        boolean success = userRepository.addUser(newUser);
-        if (!success) {
-            System.out.println("Błąd rejestracji");
-        }
+        userRepository.addUser(newUser);
+
         Main.menu();
     }
 
@@ -37,6 +35,9 @@ public class UserServices {
         boolean success = userRepository.userLogin(checkUser);
         if(!success) {
             System.out.println("Podany login lub hasło są nieprawidlowe");
+        }
+        else{
+            System.out.println("Pomyślnie zalogowano");
         }
         Main.menu();
     }

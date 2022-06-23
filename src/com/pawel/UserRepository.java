@@ -11,20 +11,15 @@ public class UserRepository {
     }
 
     private final List<User> userList = new ArrayList<>();
+    public void addUser(User newUser) {
 
-    public boolean addUser(User newUser) {
-        if (newUser == null ||
-                newUser.getLogin() == null || newUser.getLogin().trim().length() == 0 ||
-                newUser.getPassword() == null|| newUser.getPassword().trim().length() == 0) {
-            return false;
-        }
-        for (User user : userList) {
-            if (newUser.getLogin().equals(user.getLogin())) {
-                return false;
+        if(!ServicesValidation.getInstance().checkRegister(newUser).isEmpty()){
+            for(EnumValidation enums : ServicesValidation.getInstance().checkRegister(newUser))
+            {
+                System.out.println(enums.statement);
             }
         }
         userList.add(newUser);
-        return true;
     }
 
     public boolean userLogin(User checkUser)
@@ -38,8 +33,7 @@ public class UserRepository {
         {
             if(checkUser.getLogin().equals(user.getLogin()) && checkUser.getPassword().equals(user.getPassword()))
             {
-                System.out.println("Pomyślnie zalogowano");
-                UserLogged.getInstance().setActiveUser(checkUser);
+                UserLogged.getInstance().setActiveUser(user);
                 return true;
             }
         }

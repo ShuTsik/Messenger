@@ -1,10 +1,10 @@
 package com.pawel;
 
 public class UserLogged {
-    private static final UserLogged userLogged = new UserLogged();
+    private static final UserLogged instance = new UserLogged();
     private UserLogged() { }
     public static UserLogged getInstance(){
-        return userLogged;
+        return instance;
     }
 
     public void setActiveUser(User user) {
