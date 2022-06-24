@@ -11,34 +11,30 @@ public class UserRepository {
     }
 
     private final List<User> userList = new ArrayList<>();
-    public void addUser(User newUser) {
-
-        if(!ServicesValidation.getInstance().checkRegister(newUser).isEmpty()){
-            for(EnumValidation enums : ServicesValidation.getInstance().checkRegister(newUser))
+    public void addUser(User checkUser) {
+        if(!UserValidation.getInstance().checkRegister(checkUser).isEmpty()){
+            for(EnumValidation enums : UserValidation.getInstance().checkRegister(checkUser))
             {
                 System.out.println(enums.statement);
             }
+        }else{
+        userList.add(checkUser);
+        System.out.println(userList.size());
         }
-        userList.add(newUser);
     }
 
-    public boolean userLogin(User checkUser)
-    {
-        if(checkUser == null ||
-                checkUser.getLogin() == null || checkUser.getLogin().trim().length() == 0 ||
-                checkUser.getPassword() == null || checkUser.getPassword().trim().length() == 0){
-            return false;
-        }
-        for (User user : userList)
-        {
-            if(checkUser.getLogin().equals(user.getLogin()) && checkUser.getPassword().equals(user.getPassword()))
-            {
-                UserLogged.getInstance().setActiveUser(user);
-                return true;
+    public String userLogin(User checkUser) {
+        if (!UserValidation.getInstance().checkLogin(checkUser).isEmpty()) {
+            for (EnumValidation enums : UserValidation.getInstance().checkLogin(checkUser)) {
+                System.out.println(enums.statement);
             }
+        }else{
+            UserLogged.getInstance().setActiveUser(checkUser);
         }
-        return false;
+        return checkUser.getLogin();
     }
+
+
 
     public List<User> getUserList() {
         return userList;

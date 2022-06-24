@@ -32,13 +32,7 @@ public class UserServices {
         checkUser.setLogin(scanner.next());
         System.out.println("podaj haslo");
         checkUser.setPassword(scanner.next());
-        boolean success = userRepository.userLogin(checkUser);
-        if(!success) {
-            System.out.println("Podany login lub hasło są nieprawidlowe");
-        }
-        else{
-            System.out.println("Pomyślnie zalogowano");
-        }
+        userRepository.userLogin(checkUser);
         Main.menu();
     }
 }
