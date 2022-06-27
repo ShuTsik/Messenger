@@ -19,8 +19,14 @@ public class UserServices {
         newUser.setLogin(scanner.next());
         System.out.println("podaj haslo");
         newUser.setPassword(scanner.next());
-        userRepository.addUser(newUser);
-
+        if (!UserValidation.getInstance().checkRegister(newUser).isEmpty()){
+            for (EnumValidation enums : UserValidation.getInstance().checkRegister(newUser))
+            {
+                System.out.println(enums.statement);
+            }
+        } else {
+            userRepository.addUser(newUser);
+        }
         Main.menu();
     }
 
@@ -32,7 +38,14 @@ public class UserServices {
         checkUser.setLogin(scanner.next());
         System.out.println("podaj haslo");
         checkUser.setPassword(scanner.next());
-        userRepository.userLogin(checkUser);
+        if (!UserValidation.getInstance().checkLogin(checkUser).isEmpty()) {
+            for (EnumValidation enums : UserValidation.getInstance().checkLogin(checkUser)) {
+                System.out.println(enums.statement);
+            }
+        } else {
+            User activeUser = userRepository.getUserByUsername(checkUser);
+            UserLogged.getInstance().setActiveUser(activeUser);
+        }
         Main.menu();
     }
 }

@@ -12,28 +12,17 @@ public class UserRepository {
 
     private final List<User> userList = new ArrayList<>();
     public void addUser(User checkUser) {
-        if(!UserValidation.getInstance().checkRegister(checkUser).isEmpty()){
-            for(EnumValidation enums : UserValidation.getInstance().checkRegister(checkUser))
-            {
-                System.out.println(enums.statement);
-            }
-        }else{
         userList.add(checkUser);
-        System.out.println(userList.size());
-        }
     }
 
-    public String userLogin(User checkUser) {
-        if (!UserValidation.getInstance().checkLogin(checkUser).isEmpty()) {
-            for (EnumValidation enums : UserValidation.getInstance().checkLogin(checkUser)) {
-                System.out.println(enums.statement);
+    public User getUserByUsername(User checkUser) {
+        for (User user : userList) {
+            if(user.getLogin().equals(checkUser.getLogin())) {
+                return user;
             }
-        }else{
-            UserLogged.getInstance().setActiveUser(checkUser);
         }
-        return checkUser.getLogin();
+        return null;
     }
-
 
 
     public List<User> getUserList() {

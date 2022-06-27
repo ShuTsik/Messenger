@@ -8,7 +8,7 @@ public class UserLogged {
     }
 
     public void setActiveUser(User user) {
-        System.out.println(user.getLogin());
+        System.out.println("Pomyslnie zalogowano uzytkownika: " + user.getLogin());
     }
 }
 

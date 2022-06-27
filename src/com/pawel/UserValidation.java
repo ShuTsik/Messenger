@@ -12,17 +12,17 @@ public class UserValidation {
     public List<EnumValidation> checkRegister(User checkUser){
         List<EnumValidation> errors = new ArrayList<>();
         if (checkUser == null || checkUser.getLogin() == null || checkUser.getLogin().trim().length() == 0){
-            errors.add(EnumValidation.FIELDISEMPTY);
+            errors.add(EnumValidation.FIELD_IS_EMPTY);
         }
         for(User user : UserRepository.getInstance().getUserList())
         {
             if(user.getLogin().equals(checkUser.getLogin()))
             {
-                errors.add(EnumValidation.USERNAMENOTUNIQUE);
+                errors.add(EnumValidation.USERNAME_NOT_UNIQUE);
             }
         }
         if (checkUser == null || checkUser.getPassword() == null || checkUser.getPassword().trim().length() == 0){
-            errors.add(EnumValidation.FIELDISEMPTY);
+            errors.add(EnumValidation.FIELD_IS_EMPTY);
         }
     return errors;
     }
@@ -31,15 +31,16 @@ public class UserValidation {
         if (checkUser == null ||
                 checkUser.getLogin() == null || checkUser.getLogin().trim().length() == 0 ||
                 checkUser.getPassword() == null || checkUser.getPassword().trim().length() == 0) {
-            errors.add(EnumValidation.FIELDISEMPTY);
+            errors.add(EnumValidation.FIELD_IS_EMPTY);
         }
         for(User user : UserRepository.getInstance().getUserList())
         {
-            if(!(user.getLogin().equals(checkUser.getLogin()) && user.getPassword().equals(checkUser.getPassword())))
+            if(user.getLogin().equals(checkUser.getLogin()) && user.getPassword().equals(checkUser.getPassword()))
             {
-                errors.add(EnumValidation.WRONGIDENTITIES);
+                return new ArrayList<>();
             }
         }
+        errors.add(EnumValidation.WRONG_IDENTITIES);
         return errors;
     }
 }
