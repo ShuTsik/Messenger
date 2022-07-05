@@ -37,7 +37,7 @@ public class MessageServices {
     public void showMessages() {
         List<Integer> pages = new ArrayList<>();
         int page = 0;
-       System.out.println("Wiadomosci:");
+        System.out.println("Wiadomosci:");
         System.out.println("----------------------------------------");
         for(int i = 0; i < UserLogged.getInstance().getActiveUser().getUserMessages().size(); i++) {
             if(i % 5 == 0) {
@@ -54,9 +54,6 @@ public class MessageServices {
                             "\nTresc: " + message.getContent());
             System.out.println("----------------------------------------");
         }
-        UserMessageInterface.getInstance().showMessageMenu();
-
-
-
+        UserMessageView.getInstance().showMenu();
     }
 }

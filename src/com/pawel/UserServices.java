@@ -44,6 +44,6 @@ public class UserServices {
         }
 
         UserLogged.getInstance().setActiveUser(UserRepository.getInstance().getUserByUsername(checkUser));
-        LoggedUserMenuInterface.getInstance().showLoggedUserMenu();
+        LoggedUserMenuView.getInstance().showMenu();
     }
 }
