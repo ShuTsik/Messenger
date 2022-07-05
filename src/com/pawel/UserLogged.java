@@ -6,9 +6,13 @@ public class UserLogged {
     public static UserLogged getInstance(){
         return instance;
     }
-
+   private User activeUser;
     public void setActiveUser(User user) {
-        System.out.println("Pomyslnie zalogowano uzytkownika: " + user.getLogin());
+        activeUser = user;
+    }
+
+    public User getActiveUser() {
+        return activeUser;
     }
 }
 

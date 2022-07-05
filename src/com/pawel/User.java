@@ -1,9 +1,13 @@
 package com.pawel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     private String login;
     private String password;
+    private final List<Message> userMessages = new ArrayList<>();
 
     public User() {
     }
@@ -28,6 +32,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Message> getUserMessages() {
+        return userMessages;
+    }
+    public void addMessage(Message message){
+        userMessages.add(message);
     }
 
     @Override

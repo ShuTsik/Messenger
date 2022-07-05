@@ -10,7 +10,7 @@ public class UserServices {
     }
 
     private final UserRepository userRepository = UserRepository.getInstance();
-
+    private final UserValidation userValidation = UserValidation.getInstance();
     public void userRegister()
     {
         User newUser = new User();
@@ -19,15 +19,14 @@ public class UserServices {
         newUser.setLogin(scanner.next());
         System.out.println("podaj haslo");
         newUser.setPassword(scanner.next());
-        if (!UserValidation.getInstance().checkRegister(newUser).isEmpty()){
-            for (EnumValidation enums : UserValidation.getInstance().checkRegister(newUser))
+        if (!userValidation.checkRegister(newUser).isEmpty()) {
+            for (EnumValidation enums : userValidation.checkRegister(newUser))
             {
                 System.out.println(enums.statement);
             }
         } else {
             userRepository.addUser(newUser);
         }
-        Main.menu();
     }
 
     public void userLogin()
@@ -38,14 +37,13 @@ public class UserServices {
         checkUser.setLogin(scanner.next());
         System.out.println("podaj haslo");
         checkUser.setPassword(scanner.next());
-        if (!UserValidation.getInstance().checkLogin(checkUser).isEmpty()) {
-            for (EnumValidation enums : UserValidation.getInstance().checkLogin(checkUser)) {
-                System.out.println(enums.statement);
-            }
-        } else {
-            User activeUser = userRepository.getUserByUsername(checkUser);
-            UserLogged.getInstance().setActiveUser(activeUser);
+
+        if(userRepository.getUserByUsername(checkUser) == null) {
+            System.out.println("Uzytkownik o podanym loginie nie istnieje");
+            return;
         }
-        Main.menu();
+
+        UserLogged.getInstance().setActiveUser(UserRepository.getInstance().getUserByUsername(checkUser));
+        LoggedUserMenuInterface.getInstance().showLoggedUserMenu();
     }
 }

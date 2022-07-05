@@ -9,5 +9,16 @@ public class MessagesRepository {
     public static MessagesRepository getInstance(){
         return instance;
     }
-    List<Message> messages = new ArrayList<>();
+    private final List<Message> messages = new ArrayList<>();
+    public void addMessage(Message message) {
+        messages.add(message);
+    }
+    public List<Message> showMessages() {
+
+        return messages;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
 }

@@ -26,6 +26,7 @@ public class UserValidation {
         }
     return errors;
     }
+    /*
     public List<EnumValidation> checkLogin(User checkUser) {
         List<EnumValidation> errors = new ArrayList<>();
         if (checkUser == null ||
@@ -43,4 +44,6 @@ public class UserValidation {
         errors.add(EnumValidation.WRONG_IDENTITIES);
         return errors;
     }
+
+     */
 }
