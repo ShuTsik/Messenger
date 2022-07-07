@@ -1,4 +1,4 @@
-package com.pawel;
+package com.pawel.validation;
 
 public enum EnumValidation {
     PASSWORD_TOO_SHORT("Podane haslo jest zbyt krotkie"),

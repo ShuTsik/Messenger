@@ -1,4 +1,7 @@
-package com.pawel;
+package com.pawel.validation;
+
+import com.pawel.model.User;
+import com.pawel.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;

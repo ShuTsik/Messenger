@@ -1,4 +1,7 @@
-package com.pawel;
+package com.pawel.views;
+
+import com.pawel.UserLogged;
+import com.pawel.services.MessageServices;
 
 import java.util.Scanner;
 

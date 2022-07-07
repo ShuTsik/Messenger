@@ -1,4 +1,6 @@
-package com.pawel;
+package com.pawel.model;
+
+import com.pawel.model.User;
 
 public class Message {
     private User author;

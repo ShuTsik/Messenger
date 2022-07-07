@@ -1,4 +1,4 @@
-package com.pawel;
+package com.pawel.model;
 
 import java.util.ArrayList;
 import java.util.List;

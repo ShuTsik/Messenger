@@ -1,18 +1,20 @@
-package com.pawel;
+package com.pawel.views;
+
+import com.pawel.services.MessageServices;
 
 import java.util.Scanner;
 
-public class MainMenuView extends AbstractView {
-    private static final MainMenuView instance = new MainMenuView();
-    private MainMenuView() { };
-    public static MainMenuView getInstance() {
+public class UserMessageView extends AbstractView {
+    private static final UserMessageView instance = new UserMessageView();
+    private UserMessageView() { };
+    public static UserMessageView getInstance() {
         return instance;
     }
 
     protected boolean show() {
-        System.out.println("\n#####################################\nMain Menu\n");
+        System.out.println("\n#####################################\nYour Messages\n");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("User interface:\n1.Login\n2.Register\n3.Wyłącz aplikacje");
+        System.out.println("User interface:\n1.Usun wiadomosc\n2.Wybierz strone\n3.Powrot do menu");
         String choiceS = scanner.next();
         int choice = 0;
         try {
@@ -22,11 +24,10 @@ public class MainMenuView extends AbstractView {
         }
         switch (choice) {
             case 1:
-                UserServices.getInstance().userLogin();
+                System.out.println("1"); //usuwanie wiadomosci
                 break;
             case 2:
-                UserServices.getInstance().userRegister();
-                break;
+                MessageServices.getInstance().showMessages();
             case 3:
                 return false;
             default:

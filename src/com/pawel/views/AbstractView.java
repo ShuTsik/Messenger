@@ -1,4 +1,4 @@
-package com.pawel;
+package com.pawel.views;
 
 public abstract class AbstractView {
     public void showMenu() {

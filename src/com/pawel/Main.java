@@ -1,5 +1,7 @@
 package com.pawel;
 
+import com.pawel.views.MainMenuView;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -8,10 +10,7 @@ public class Main {
 
     /*
     todo
-    -zlapac exepction przy wyborze do kogo wyslac wiadomosc
-    -dodac sprawdzanie hasla przy logowaniu
     -dodac zwijanie sie wiadomosci do stron
-    - uporządkować strukturę na foldery model, service, view, repository
      */
 
 }

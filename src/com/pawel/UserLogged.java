@@ -1,5 +1,7 @@
 package com.pawel;
 
+import com.pawel.model.User;
+
 public class UserLogged {
     private static final UserLogged instance = new UserLogged();
     private UserLogged() { }

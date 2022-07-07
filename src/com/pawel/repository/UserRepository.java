@@ -1,4 +1,6 @@
-package com.pawel;
+package com.pawel.repository;
+
+import com.pawel.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
