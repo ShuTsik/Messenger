@@ -20,7 +20,7 @@ public class MessageServices {
     }
 
     private static final int paginatedPage = 5;
-    private List<Message> userMessages = UserLogged.getInstance().getActiveUser().getUserMessages();
+    private final UserLogged userLogged = UserLogged.getInstance();
     public void sendMessage() {
         Message message = new Message();
         System.out.println("Wpisz nazwe uzytkownika, do ktorego chcesz wyslac wiadomosc: ");
@@ -29,8 +29,10 @@ public class MessageServices {
         scanner.nextLine();
         if(UserRepository.getInstance().getUserByUsername(toUser) == null) {
             System.out.println("Podany uzytkownik nie istnieje");
+            return;
         }
         message.setAuthor(UserLogged.getInstance().getActiveUser());
+        System.out.println("Podaj treść wiadomości");
         message.setContent(scanner.nextLine());
         UserRepository.getInstance().getUserByUsername(toUser).addMessage(message);
     }
@@ -42,7 +44,7 @@ public class MessageServices {
         System.out.println("----------------------------------------");
 
         try {
-            for (Message message : PaginateList.paginateList(userMessages,paginatedPage)) {
+            for (Message message : PaginateList.paginateList(userLogged.getActiveUser().getUserMessages(), paginatedPage)) {
 
                 System.out.println(
                         "Wiadomosc od: " + message.getAuthor().getLogin() +
@@ -58,7 +60,7 @@ public class MessageServices {
     public void deleteMessage() {
         System.out.println("Wybierz wiadomosc, ktora chcesz usunac");
         try {
-            for(Message message : PaginateList.paginateList(userMessages,paginatedPage)) {
+            for(Message message : PaginateList.paginateList(userLogged.getActiveUser().getUserMessages(), paginatedPage)) {
                 System.out.println(
                         "[" + message.getId() + "]" +
                                 "Wiadomosc od: " + message.getAuthor().getLogin() +
@@ -72,7 +74,7 @@ public class MessageServices {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ktora wiadomosc chcesz usunac?");
         try {
-            userMessages.remove(scanner.nextInt() - 1);
+            userLogged.getActiveUser().getUserMessages().remove(scanner.nextInt() - 1);
         } catch (Exception IndexOutOfBoundsException) {
             System.out.println("Wybrany element nie istnieje");
         }
