@@ -3,6 +3,7 @@ package com.pawel.model;
 import com.pawel.model.User;
 
 public class Message {
+    private int id;
     private User author;
     private User destination;
     private String content;
@@ -21,6 +22,12 @@ public class Message {
 
     public void setDestination(User destination) {
         this.destination = destination;
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getContent() {

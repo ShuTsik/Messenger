@@ -12,9 +12,9 @@ public class UserMessageView extends AbstractView {
     }
 
     protected boolean show() {
-        System.out.println("\n#####################################\nYour Messages\n");
+        System.out.println("\n#####################################\nTwoje Wiadomosci\n");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("User interface:\n1.Usun wiadomosc\n2.Wybierz strone\n3.Powrot do menu");
+        System.out.println("User interface:\n1.Usun wiadomosc\n2.Wybierz strone do przejrzenia\n3.Powrot do menu");
         String choiceS = scanner.next();
         int choice = 0;
         try {
@@ -24,7 +24,7 @@ public class UserMessageView extends AbstractView {
         }
         switch (choice) {
             case 1:
-                System.out.println("1"); //usuwanie wiadomosci
+                MessageServices.getInstance().deleteMessage();
                 break;
             case 2:
                 MessageServices.getInstance().showMessages();

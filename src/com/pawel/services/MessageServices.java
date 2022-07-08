@@ -1,5 +1,6 @@
 package com.pawel.services;
 
+import com.pawel.PaginateList;
 import com.pawel.UserLogged;
 import com.pawel.views.UserMessageView;
 import com.pawel.repository.UserRepository;
@@ -14,32 +15,29 @@ public class MessageServices {
     private MessageServices() {
     }
 
-    ;
-
     public static MessageServices getInstance() {
         return instance;
     }
 
     private static final int paginatedPage = 5;
-
+    private List<Message> userMessages = UserLogged.getInstance().getActiveUser().getUserMessages();
     public void sendMessage() {
+        List<User> users = UserRepository.getInstance().getUserList();
         Message message = new Message();
-        int i = 1;
         System.out.println("do kogo chcesz wyslac wiadomosc?");
-        for (User user : UserRepository.getInstance().getUserList()) {
-            System.out.println(i + ". " + user.getLogin());
-            i++;
+        for (User user : PaginateList.paginateList(users,paginatedPage)) {
+            System.out.println(user.getId() + ". " + user.getLogin());
         }
         Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt() - 1;
+        int choice = scanner.nextInt();
         scanner.nextLine();
         message.setAuthor(UserLogged.getInstance().getActiveUser());
+        message.setId(UserRepository.getInstance().getUserList().get(choice - 1).getUserMessages().size() + 1);
         System.out.println("Tresc wiadomosci: ");
         message.setContent(scanner.nextLine());
 
         try {
-            message.setDestination(UserRepository.getInstance().getUserList().get(choice));
-            UserRepository.getInstance().getUserList().get(choice).addMessage(message);
+            UserRepository.getInstance().getUserList().get(choice - 1).addMessage(message);
         } catch (Exception e) {
             System.out.println("taki uzytkownik nie istnieje");
             return;
@@ -50,39 +48,44 @@ public class MessageServices {
 
 
     public void showMessages() {
-        int pages = 0;
-        int activePage = 1;
-        List<Message> userMessages = UserLogged.getInstance().getActiveUser().getUserMessages();
-        for(int i = 0; i <= userMessages.size(); i++) {
-            if(i % 5 == 0) {
-                pages++;
-            }
-        }
-        System.out.println("Wybierz strone z wiadomosciami: ");
-        System.out.println(activePage + "/" + pages);
-        Scanner scanner = new Scanner(System.in);
-        activePage = scanner.nextInt();
         System.out.println("Wiadomosci:");
         System.out.println("----------------------------------------");
 
-        if(activePage <=0) {
-            System.out.println("Taka strona nie istnieje");
-            return;
+        try {
+            for (Message message : PaginateList.paginateList(userMessages,paginatedPage)) {
+
+                System.out.println(
+                        "Wiadomosc od: " + message.getAuthor().getLogin() +
+                                "\nTresc: " + message.getContent());
+                System.out.println("----------------------------------------");
+            }
+            UserMessageView.getInstance().showMenu();
+        } catch (Exception e) {
+            System.out.println("Podano zla wartosc");
         }
-        int fromIndex = (activePage - 1) * paginatedPage;
-        if(userMessages == null || userMessages.size() <= fromIndex) {
-            System.out.println("Brak wiadomosci");
-            return;
         }
 
-        for (Message message : userMessages.subList(fromIndex, Math.min(fromIndex + paginatedPage, userMessages.size()))) {
+    public void deleteMessage() {
+        System.out.println("Wybierz wiadomosc, ktora chcesz usunac");
+        try {
+            for(Message message : PaginateList.paginateList(userMessages,paginatedPage)) {
+                System.out.println(
+                        "[" + message.getId() + "]" +
+                                "Wiadomosc od: " + message.getAuthor().getLogin() +
+                                "\nTresc: " + message.getContent());
+                System.out.println("----------------------------------------");
+            }
+            } catch (Exception e){
+                System.out.println("Podano zla wartosc");
+            }
 
-            System.out.println(
-                    "Wiadomosc od: " + message.getAuthor().getLogin() +
-                            "\nTresc: " + message.getContent());
-            System.out.println("----------------------------------------");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ktora wiadomosc chcesz usunac?");
+        try {
+            userMessages.remove(scanner.nextInt() - 1);
+        } catch (Exception IndexOutOfBoundsException) {
+            System.out.println("Wybrany element nie istnieje");
         }
-        System.out.println(activePage + "/" + pages);
-        UserMessageView.getInstance().showMenu();
+
     }
 }

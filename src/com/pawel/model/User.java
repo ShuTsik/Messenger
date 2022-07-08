@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-
+    private int id;
     private String login;
     private String password;
     private final List<Message> userMessages = new ArrayList<>();
@@ -32,6 +32,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public List<Message> getUserMessages() {

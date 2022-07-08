@@ -26,6 +26,7 @@ public class UserServices {
         newUser.setLogin(scanner.next());
         System.out.println("podaj haslo");
         newUser.setPassword(scanner.next());
+        newUser.setId(userRepository.getUserList().size() + 1);
         if (!userValidation.checkRegister(newUser).isEmpty()) {
             for (EnumValidation enums : userValidation.checkRegister(newUser))
             {

@@ -17,7 +17,7 @@ public class LoggedUserMenuView extends AbstractView {
         System.out.println("\n#####################################\nLogged User Menu\n");
         System.out.println("Witaj: " + userLogged.getActiveUser().getLogin() + "!");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("User interface:\n1.Sprawdz wiadomosci\n2.Wyslij wiadomosc\n3.Wyloguj");
+        System.out.println("User interface:\n1.Sprawdz wiadomosci\n2.Wyslij wiadomosc\n3.Usun wiadomosci\n4.Wyloguj");
         String choiceS = scanner.next();
         int choice = 0;
         try {
@@ -33,6 +33,9 @@ public class LoggedUserMenuView extends AbstractView {
                 MessageServices.getInstance().sendMessage();
                 break;
             case 3:
+                MessageServices.getInstance().deleteMessage();
+                break;
+            case 4:
                 return false;
             default:
                 break;
