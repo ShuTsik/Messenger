@@ -17,9 +17,9 @@ public class UserRepository {
         userList.add(checkUser);
     }
 
-    public User getUserByUsername(User checkUser) {
+    public User getUserByUsername(String checkUser) {
         for (User user : userList) {
-            if(user.getLogin().equals(checkUser.getLogin())) {
+            if(user.getLogin().equals(checkUser)) {
                 return user;
             }
         }

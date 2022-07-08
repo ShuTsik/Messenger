@@ -46,16 +46,16 @@ public class UserServices {
         System.out.println("podaj haslo");
         checkUser.setPassword(scanner.next());
 
-        if(userRepository.getUserByUsername(checkUser) == null) {
+        if(userRepository.getUserByUsername(checkUser.getLogin()) == null) {
             System.out.println("Uzytkownik o podanym loginie nie istnieje");
             return;
         }
-        if(!userRepository.getUserByUsername(checkUser).getPassword().equals(checkUser.getPassword())) {
+        if(!userRepository.getUserByUsername(checkUser.getPassword()).getPassword().equals(checkUser.getPassword())) {
             System.out.println("nieprawidlowe dane logowania");
             return;
         }
 
-        UserLogged.getInstance().setActiveUser(userRepository.getUserByUsername(checkUser));
+        UserLogged.getInstance().setActiveUser(userRepository.getUserByUsername(checkUser.getLogin()));
         LoggedUserMenuView.getInstance().showMenu();
     }
 }

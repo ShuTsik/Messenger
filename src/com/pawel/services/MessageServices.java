@@ -22,27 +22,17 @@ public class MessageServices {
     private static final int paginatedPage = 5;
     private List<Message> userMessages = UserLogged.getInstance().getActiveUser().getUserMessages();
     public void sendMessage() {
-        List<User> users = UserRepository.getInstance().getUserList();
         Message message = new Message();
-        System.out.println("do kogo chcesz wyslac wiadomosc?");
-        for (User user : PaginateList.paginateList(users,paginatedPage)) {
-            System.out.println(user.getId() + ". " + user.getLogin());
-        }
+        System.out.println("Wpisz nazwe uzytkownika, do ktorego chcesz wyslac wiadomosc: ");
         Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
+        String toUser = scanner.next();
         scanner.nextLine();
-        message.setAuthor(UserLogged.getInstance().getActiveUser());
-        message.setId(UserRepository.getInstance().getUserList().get(choice - 1).getUserMessages().size() + 1);
-        System.out.println("Tresc wiadomosci: ");
-        message.setContent(scanner.nextLine());
-
-        try {
-            UserRepository.getInstance().getUserList().get(choice - 1).addMessage(message);
-        } catch (Exception e) {
-            System.out.println("taki uzytkownik nie istnieje");
-            return;
+        if(UserRepository.getInstance().getUserByUsername(toUser) == null) {
+            System.out.println("Podany uzytkownik nie istnieje");
         }
-
+        message.setAuthor(UserLogged.getInstance().getActiveUser());
+        message.setContent(scanner.nextLine());
+        UserRepository.getInstance().getUserByUsername(toUser).addMessage(message);
     }
 
 
